@@ -1,0 +1,21 @@
+﻿<Page x:Class="BeautySalone.pages.PageMainMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BeautySalone.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="480" d:DesignWidth="600"
+      MinHeight="480" MinWidth="600"
+      Title="Мордочка">
+
+    <Grid>
+        <UniformGrid Columns="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="buttonClients" Content="Клиентская база" Style="{StaticResource accent_button}" Height="35" Click="buttonClients_Click"/>
+            <Button x:Name="buttonEmployees" Content="База сотрудников" Style="{StaticResource accent_button}" Height="35" Click="buttonError_Click"/>
+            <Button x:Name="buttonProducts" Content="База товаров" Style="{StaticResource accent_button}" Height="35" Click="buttonError_Click"/>
+            <Button x:Name="buttonServices" Content="База услуг" Style="{StaticResource accent_button}" Height="35" Click="buttonError_Click"/>
+            <Button x:Name="buttonManagment" Content="Управление компанией" Style="{StaticResource accent_button}" Height="35" Click="buttonError_Click"/>
+        </UniformGrid>
+    </Grid>
+</Page>
