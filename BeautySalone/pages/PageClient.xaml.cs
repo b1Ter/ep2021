@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace BeautySalone.pages
     {
         public static bdBeautySaloneEntities context = new bdBeautySaloneEntities();
         List<Client> clients = context.Client.ToList();
+
         public static int oldDisplayingRow;
         public static int displayingRows = 10;
         public static int currentCountDataGrid = 0;
@@ -51,7 +53,7 @@ namespace BeautySalone.pages
                 clients = clients.Where(x => x.Phone.Replace("(","").Replace(")", "").Replace(" ", "").Replace("-", "").ToString().Contains(Phone_TextBox.Text)).ToList();
 
             if (LastName_TextBox.Text != String.Empty)
-                clients = clients.Where(x => x.LastName.ToLower().Contains(LastName_TextBox.Text)).ToList();
+                clients = clients.Where(x => x.LastName.ToLower().Contains(LastName_TextBox.Text.ToLower())).ToList();
 
             if (clients.ToList().Count <= displayingRows)
                 displayingRows = clients.ToList().Count;
@@ -233,11 +235,13 @@ namespace BeautySalone.pages
 
         private void LastName_TextBox_KeyDown(object sender, KeyEventArgs e)
         {
+            clients = context.Client.ToList();
             ShowTable();
         }
 
         private void comboBoxGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            clients = context.Client.ToList();
             ShowTable();
         }
 
@@ -259,6 +263,44 @@ namespace BeautySalone.pages
                 context.SaveChanges();
                 ShowTable();
             }
+        }
+
+        private void buttonRemoveTag_Click(object sender, RoutedEventArgs e)
+        {
+            Button buttonTagClient = (Button)sender;
+            Tag tag = buttonTagClient.DataContext as Tag;
+            Client client = (Client)dataGridClients.SelectedItem;
+
+            List<Tag> tags = context.Tag.AsEnumerable().Where(x => x.Client.Contains(client)).ToList();
+            tags.Remove(tag);
+
+            client.Tag.Clear();
+
+            foreach (var x in tags)
+            {
+                client.Tag.Add(x);
+            }
+
+            //((IObjectContextAdapter)context).ObjectContext.DeleteObject(tag);
+
+            //context.Tag.Remove(context.Client.Where(x => x.Tag.Contains(tag) && x == client).Select(x => x).First());
+
+            //context.Tag.Remove(context.Tag.
+            //    Where(x => x == tag && 
+            //    x.Client.Contains(client)).
+            //    Select(x => x).First()).
+            //    Client.Contains(client);
+            //context.Client.Remove(context.Client.
+            //    Where(x => x == client).
+            //    Where(x => x.Tag.Contains(tag)).
+            //    Select(x => x.Tag.Contains(tag)).
+            //    FirstOrDefault());
+
+            //MessageBoxResult result = MessageBox.Show(tagClient.Title.ToString(),
+            //    "Тег", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+            context.SaveChanges();
+            ShowTable();
         }
     }
 }

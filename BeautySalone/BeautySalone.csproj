@@ -92,6 +92,7 @@
     <Compile Include="pages\PageEditClient.xaml.cs">
       <DependentUpon>PageEditClient.xaml</DependentUpon>
     </Compile>
+    <Compile Include="partialClasses\PartialTag.cs" />
     <Compile Include="partialClasses\patrialClient.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>bdModelBeautySalone.tt</DependentUpon>

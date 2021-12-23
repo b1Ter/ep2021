@@ -54,19 +54,34 @@
                 <DataGridTextColumn Header="Зарегистрирован" Binding="{Binding RegistrationDate, StringFormat={}{0:dd/MM/yyyy}}" ElementStyle="{StaticResource Wrapping_TextBlock}" Width="175"/>
                 <DataGridTextColumn Header="Последнее посещение" Binding="{Binding DateLastVisit, StringFormat={}{0:dd/MM/yyyy}}" ElementStyle="{StaticResource Wrapping_TextBlock}" Width="225" />
                 <DataGridTextColumn Header="Число посещений" Binding="{Binding NumberOfVisitts}" ElementStyle="{StaticResource Wrapping_TextBlock}" Width="190"/>
+
                 <DataGridTemplateColumn Header="Теги">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ListViewItem Background="{Binding Tag.Color}" Content="{Binding Tag}">
-                                <!--<StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Tag.Title}"/>
-                                    <Button x:Name="buttonRemoveTag" Style="{StaticResource simple_button}" Content="X"/>
-                                </StackPanel>-->
-                            </ListViewItem>
+                            <ListBox ItemsSource="{Binding Tag}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                            <TextBlock Text="{Binding Title}" Background="{Binding colorTag}" Foreground="White"/>
+                                            <Button x:Name="buttonRemoveTag" Content="x" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonRemoveTag_Click"
+                                                    BorderThickness="0" Foreground="White" Margin="3,1,1,1">
+                                                <Button.Background>
+                                                    <SolidColorBrush Color="{Binding colorTag}"/>
+                                                </Button.Background>
+                                            </Button>
+                                            <StackPanel.Background>
+                                                <SolidColorBrush Color="{Binding colorTag}"/>
+                                            </StackPanel.Background>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
+                
+                
                 <DataGridTemplateColumn Width="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

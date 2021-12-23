@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BeautySalone.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="900"
       Title="Данные о клиенте">
 
     <Grid>
@@ -18,36 +18,40 @@
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0">
-            <UniformGrid Columns="2" HorizontalAlignment="Left">
+            <UniformGrid Columns="2" HorizontalAlignment="Left" VerticalAlignment="Center">
 
                 <TextBlock Style="{StaticResource Simple_textBlock}">ID:</TextBlock>
                 <TextBlock Text="{Binding ID}" Style="{StaticResource Simple_textBlock}"/>
 
-                <TextBlock Style="{StaticResource Simple_textBlock}">First name:</TextBlock>
+                <TextBlock Style="{StaticResource Simple_textBlock}">Имя:</TextBlock>
                 <TextBox Text="{Binding FirstName}"
                          Style="{StaticResource Simple_TextBox}"/>
 
-                <TextBlock Style="{StaticResource Simple_textBlock}">Last name:</TextBlock>
+                <TextBlock Style="{StaticResource Simple_textBlock}">Фамилия:</TextBlock>
                 <TextBox Text="{Binding LastName}"
                          Style="{StaticResource Simple_TextBox}"/>
 
-                <TextBlock Style="{StaticResource Simple_textBlock}">Patronymic:</TextBlock>
+                <TextBlock Style="{StaticResource Simple_textBlock}">Отчество:</TextBlock>
                 <TextBox Text="{Binding Patronymic}"
                          Style="{StaticResource Simple_TextBox}"/>
 
-                <TextBlock Style="{StaticResource Simple_textBlock}">Birthday:</TextBlock>
-                <DatePicker Width="190" SelectedDate="{Binding Birthday}"/>
+                <TextBlock Style="{StaticResource Simple_textBlock}">День рожденья:</TextBlock>
+                <DatePicker Width="190" Height="38" SelectedDate="{Binding Birthday}"/>
 
-                <TextBlock Style="{StaticResource Simple_textBlock}">Registration date:</TextBlock>
-                <DatePicker Width="190" SelectedDate="{Binding RegistrationDate}"/>
+                <TextBlock Style="{StaticResource Simple_textBlock}">Дата регистрации:</TextBlock>
+                <DatePicker Width="190" Height="38" SelectedDate="{Binding RegistrationDate}"/>
 
+                <TextBlock Style="{StaticResource Simple_textBlock}">Телефон:</TextBlock>
+                <TextBox Text="{Binding Phone}"
+                         Style="{StaticResource Simple_TextBox}"/>
+                
                 <TextBlock Style="{StaticResource Simple_textBlock}">E-mail:</TextBlock>
                 <TextBox Text="{Binding Email}"
                          Style="{StaticResource Simple_TextBox}"/>
 
                 <TextBlock Style="{StaticResource Simple_textBlock}">Gender</TextBlock>
-                <ComboBox SelectedItem="{Binding GenderCode}" DisplayMemberPath="Name" SelectedValue="{Binding GenderCode}"
-                          Width="190" Height="46" x:Name="cmbGender"/>
+                <ComboBox x:Name="cmbGender" SelectedItem="{Binding GenderCode}" DisplayMemberPath="Name"
+                          Width="220" Height="38"/>
 
             </UniformGrid>
         </StackPanel>
@@ -56,7 +60,16 @@
             <Button Style="{StaticResource accent_button}" Content="Загрузить фото" x:Name="btnChooseImage" Click="btnChooseImage_Click"
                     Width="210" Margin="10"/>
             <Image Source="{Binding PhotoPath}" x:Name="clientImage" Width="280" Height="280" Margin="10"></Image>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Добавить тег" Style="{StaticResource simple_button}" x:Name="btnAddTag" Click="btnAddTag_Click"/>
+                <ComboBox x:Name="cmbTags" Style="{StaticResource Simple_ComboBox}" DisplayMemberPath="Title"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Теги: " Style="{StaticResource Simple_textBlock}"/>
+                <StackPanel x:Name="tags" Orientation="Vertical"></StackPanel>
+            </StackPanel>
         </StackPanel>
+        
         <StackPanel Grid.ColumnSpan="2" Grid.Row="2"
                     Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="btnCancel" Style="{StaticResource accent_button}"
